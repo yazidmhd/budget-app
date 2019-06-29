@@ -1,39 +1,60 @@
 //data module
 var budgetController = (function() {
   //private methods/variables
-  var x = 23;
-  var add = function(a){
-    return x+a;
-  }
 
   //public function
-  return {
-    publicTest: function(b){
-      return add(b);
-    }
-  }
+  
 })();
 
 //ui module
 var UIController = (function(){
   //private
 
-
   //public
-  return {
-
-  }
+  
 })();
 
 //app controller module
 var controller = (function(budgetCtrl, UICtrl) {
   //private
-  var z = budgetCtrl.publicTest(10);
+  var ctrlAddItem = function(){
+    //get input field data
+    
+    //add item to the budget controller
+
+    //add new item to user interface
+
+    //calculate the budget
+
+    //display the budget on the user interface
+    console.log('function works');
+  }
+
+  //click event
+  document.querySelector('.add__btn').addEventListener('click',ctrlAddItem);
+
+  //keypress event
+  document.addEventListener('keypress',function(event){
+    if(event.keyCode === 13 || event.which === 13){
+      ctrlAddItem();
+    }
+  });
 
   //public
-  return {
-    another: function(){
-      console.log(z);
-    }
-  }
+  
 })(budgetController, UIController);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
