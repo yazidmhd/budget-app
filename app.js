@@ -44,7 +44,7 @@ var budgetController = (function() {
     var sum = 0;
 
     data.allItems[type].forEach(function(current, index, array){
-      sum += sum + current.value;
+      sum += current.value;
     });
 
     data.totals[type] = sum;
@@ -151,7 +151,8 @@ var UIController = (function(){
     incomeLabel: '.budget__income--value',
     expensesLabel: '.budget__expenses--value',
     percentageLabel: '.budget__expenses--percentage',
-    container: '.container'
+    container: '.container',
+    expensesPercLabel: '.item__percentage'
   }
 
   return {
@@ -218,6 +219,26 @@ var UIController = (function(){
 
     },
 
+    displayPercentages: function(percentages){
+      var fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
+
+      //forEach method for list
+      var nodeListForEach = function(list, callback){
+        for(var i = 0; i < list.length; i++){
+          callback(list[i], i);
+        }
+      }
+      
+      nodeListForEach(fields, function(current, index){
+        if(percentages[index] > 0){
+          current.textContent = percentages[index] + '%';
+        } else {
+          current.textContent = '---';
+        }
+      });
+
+    },
+
     //exposes the private method to public so other controllers can use it
     getDOMstrings: function(){
       return DOMstrings;
@@ -267,7 +288,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     var percentages = budgetCtrl.getPercentages();
 
     //update the UI with new percentages
-    console.log(percentages);
+    UICtrl.displayPercentages(percentages);
   }
 
   //function where add new items
